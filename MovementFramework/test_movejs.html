@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: yellow;
+            filter:alpha(opacity=30);
+            opacity: 0.3;
+        }
+    </style>
+    <script src="move.js"></script>
+    <script>
+        window.onload = function(){
+            mdiv = document.getElementById("div1");
+            mdiv.onmouseover = function(){
+                startMove(mdiv,{width:201,height:400,opacity:100},function(){
+                    startMove(mdiv,{width:200,height:200,opacity:30});
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
