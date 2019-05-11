@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id="div1">
+        <!--列表渲染-->
+        <div v-for="item in list">
+            <!--条件渲染-->
+            <!--class绑定的写法{'classname':true}后面可以进行绑定判断-->
+            <div v-if="item.age>18" v-bind:style="styleMsg" v-bind:class="['active','add','more',{'another':item.age>20}]">
+                {{item.name}}
+            </div>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#div1",
+            data:{
+                count:0,
+                //样式绑定的好处是可以以变量修改
+                styleMsg:{
+                    color:'red',
+                    "text-shadow":"0 0 5px #000" //有 - 时要加双引号，或者用驼峰的写法textShadow
+                },
+                list:[
+                    {
+                        name:"jack",
+                        age:18
+                    },
+                    {
+                        name:"sue",
+                        age:21
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

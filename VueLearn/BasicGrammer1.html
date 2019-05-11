@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id="div1">
+        {{msg}}{{count}}
+        <p>
+            {{msg1}}
+        </p>
+    </div>
+    <script>
+        var attr = "hi";
+        var app = new Vue({
+            el:"#div1",
+            data:{
+                msg:"hello world!",
+                count:0
+            },
+            //watch只能对一个data变量进行侦听，当其值发生改变时，就会调用func方法
+            watch:{
+                msg:function(newval,oldval){
+                    console.log("new val is"+newval);
+                    console.log("oldval is"+oldval);
+                    // console.log(this.count); 尝试修改msg以外属性果然不会执行
+                }
+            },
+            //computed能对本实例中多个属性进行侦听，只要其中一个属性发生改变就会执行func方法
+            computed:{
+                msg1:function(){
+                    console.log(this.msg+" "+this.count+" "+attr); 
+                    //实例以外的属性发生改变不会触发func，但以内的属性发生变化后会重新渲染，attr会等于修改后的值
+                }
+            }
+        })
+    </script>
+</body>
+</html>
