@@ -16,6 +16,12 @@ import store from '@/store.js'
 export default {
   name: '',
   store,
+  // data(){
+  //   return{
+  //     listsPage:store.state.lists;
+  //   }
+  // },
+  //为什么不用这种方法，是因为列表中有多个元素吗
   computed:{
     listsPage:function(){
       return store.state.lists;
