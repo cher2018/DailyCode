@@ -1,5 +1,5 @@
 # DailyCode
-日常代码放置
+日常学习代码放置
 
 ---
 **MovementFramework**　　2019.05.09　　　js实现运动框架
