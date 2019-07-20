@@ -1,6 +1,7 @@
 <!-- 首先需要在头部引入文件 -->
 <link rel="stylesheet" href="./leaflet.css">
 <script src="./leaflet.js"></script>
+<script src="./leaflet.ChineseTmsProviders.js"></script>
 
 <!-- 放置地图的div，需要有id，并会在后面会进行引用 -->
 <div id="mapid"></div>
@@ -13,6 +14,8 @@
 <script>
 // 初始化地图，并设置坐标与缩放等级
 var mymap = L.map('mapid').setView([51.505, -0.09], 13)
+
+/*
 // 添加瓦片到地图中
 // 首先需要从mapbox获取access token地址
 var url = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2FuZXdhbmciLCJhIjoiY2pwM2UxNHNkMGF1MzNwc2FtMnNhdXJsMCJ9.KZpCBtizDeltZO6JhGc6_w'
@@ -21,6 +24,13 @@ var url = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.
 L.tileLayer(url, {
   maxZoom: 18,
   id: 'mapbox.streets'
+}).addTo(mymap)
+*/
+
+// 使用中国地图
+L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
+  maxZoom: 18,
+  minZoom: 5
 }).addTo(mymap)
 
 // 增加一个marker
