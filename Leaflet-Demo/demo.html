@@ -1,0 +1,55 @@
+<!-- 首先需要在头部引入文件 -->
+<link rel="stylesheet" href="./leaflet.css">
+<script src="./leaflet.js"></script>
+
+<!-- 放置地图的div，需要有id，并会在后面会进行引用 -->
+<div id="mapid"></div>
+
+<!-- 确保地图容器定义了高度 -->
+<style>
+#mapid { height: 600px; }
+</style>
+
+<script>
+// 初始化地图，并设置坐标与缩放等级
+var mymap = L.map('mapid').setView([51.505, -0.09], 13)
+// 添加瓦片到地图中
+// 首先需要从mapbox获取access token地址
+var url = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2FuZXdhbmciLCJhIjoiY2pwM2UxNHNkMGF1MzNwc2FtMnNhdXJsMCJ9.KZpCBtizDeltZO6JhGc6_w'
+
+// 将瓦片图层加载到地图上，并设置最大的聚焦和map样式（这里是streets）
+L.tileLayer(url, {
+  maxZoom: 18,
+  id: 'mapbox.streets'
+}).addTo(mymap)
+
+// 增加一个marker
+var marker = L.marker([51.5, -0.09]).addTo(mymap)
+// 增加一个圆，并添加样式
+var circle = L.circle([51.508, -0.11], {
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5,
+  radius: 500
+}).addTo(mymap)
+// 增加多边形
+var polygon = L.polygon([
+  [51.509, -0.08],
+  [51.503, -0.06],
+  [51.51, -0.047]
+]).addTo(mymap)
+
+// 绑定弹窗
+marker.bindPopup("<b>Hello world!</b><br>I am a popup").openPopup()
+circle.bindPopup("I am a circle")
+polygon.bindPopup("I am a polygon")
+
+// 将弹窗作为单独要素，不绑定在其他要素上
+// 这里使用openOn而不是addTo是因为当新的popup打开时，之前的popup就会自动关闭。
+var popup = L.popup().setLatLng([51.5, -0.09]).setContent("I am a standalone popup").openOn(mymap)
+
+// 给地图div绑定监听事件
+mymap.on('click', e => {
+  alert("You clicked the map at "+ e.latlng)
+})
+</script>
